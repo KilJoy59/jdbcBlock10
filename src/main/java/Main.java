@@ -12,8 +12,7 @@ public class Main {
         try {
             Connection connection = DriverManager.getConnection(url,user,pass);
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select course_name, " +
-                    "count(month(subscription_date))/count(*) as avgPurchase  from purchaselist group by course_name;");
+                ResultSet resultSet = statement.executeQuery("select course_name, count(subscription_date)/6 as avgPurchase from purchaselist group by course_name;");
             while (resultSet.next()) {
                 String courseName = resultSet.getString(1);
                 double avgPurchase = Double.parseDouble(resultSet.getString(2));
